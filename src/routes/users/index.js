@@ -9,7 +9,7 @@ route.get('/',async (req,res)=>{
 
 route.post('/',async (req,res)=>{
     const user = await createAnonUser()
-    console.log("value entered in table")
+    console.log("value entered in table",user)
     res.status(201).send(user)
 })
 

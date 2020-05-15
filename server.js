@@ -11,15 +11,11 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
-//console.log(usersRoute)
-
 app.use('/api/users',usersRoute)
 app.use('/api/posts',postsRoute)
 app.use('/api/comments',commentsRoute)
-
-app.get('/',(req,res)=>{
-    res.send('Hello')
-})
+console.log('__dirname',__dirname)
+app.use('/',express.static(__dirname+'/src/public'))
 
 db.sync().then(()=>{
     app.listen('9999',()=>{
