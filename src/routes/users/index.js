@@ -8,9 +8,16 @@ route.get('/',async (req,res)=>{
 })
 
 route.post('/',async (req,res)=>{
-    const user = await createAnonUser()
-    console.log("value entered in table",user)
-    res.status(201).send(user)
+    try{
+        const user = await createAnonUser()
+        console.log("value entered in table",user)
+        res.status(201).send(user)
+    }
+    catch(err){
+        console.log(err)
+        res.status(401).send({error:'Error from index.js of users route'})
+    }
+   
 })
 
 route.get('/:id',async (req,res)=>{

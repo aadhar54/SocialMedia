@@ -1,19 +1,21 @@
+const { Users } = require('../db/modules')
 const { Comments } = require('../db/modules')
+const { Posts } = require('../db/modules')
 
 
 // show all comments (of a user)
 async function showCommentsOfUser(Id){
-   const commentsOfUser =  await Comments.findAll({
-   where :{userId:Id}
-   });
+   const commentsOfUser =  await Comments.findAll(
+    {where :{userId:Id},include: [ Users ,Posts]}
+    )
    return commentsOfUser;
 }
 
 // show all comments (under a post)
 async function showCommentsOfPost(Id){
     const commentsOfPost = await Comments.findAll({
-    where :{postId:Id}
-    });
+    where :{postId:Id},include: [ Posts,Users ]}
+    )
     return commentsOfPost;
  }
 
@@ -31,7 +33,9 @@ async function addComment(title,body,userId,postId){
 
 //get all comments
 async function getAllComments(){
-    const comments = await Comments.findAll();
+    const comments = await Comments.findAll({
+        include: [ Users , Posts]
+      });
     return comments;
 }
 

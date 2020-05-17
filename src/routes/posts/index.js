@@ -1,8 +1,14 @@
 const route = require('express').Router()
-const { getAllPosts,createPost } = require('../../controllers/posts')
+const { getAllPosts,createPost ,getMyPosts} = require('../../controllers/posts')
 
 route.get('/',async (req,res)=>{
     const posts = await getAllPosts()
+    res.send(posts)
+})
+
+route.get('/userId/:id',async (req,res)=>{
+    const id = req.params.id;
+    const posts = await getMyPosts(id)
     res.send(posts)
 })
 

@@ -25,7 +25,7 @@ const COL_TITLE_DEF = {
 
 const Users = db.define('users',{
     id:COL_ID_DEF,
-    username:COL_USERNAME_DEF,
+    username:COL_USERNAME_DEF
 })
 
 const Posts = db.define('posts',{

@@ -1,6 +1,7 @@
 $(()=>{
     $('#navbar').load('/components/navbar.html',loginIfNeeded)
     $('#footer').load('/components/footer.html')
+    $('#content').load('/components/all-posts.html')
 })
 
 function loginIfNeeded() {
@@ -17,8 +18,8 @@ function loginIfNeeded() {
       })
     } else {
       console.log('resuming session as ', currentUser.username)
-      console.log($('#auth-name'))
       $('#auth-name').text(currentUser.username)
     }
   }
-  
+
+

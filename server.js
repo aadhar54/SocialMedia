@@ -14,7 +14,6 @@ app.use(express.urlencoded({extended:true}))
 app.use('/api/users',usersRoute)
 app.use('/api/posts',postsRoute)
 app.use('/api/comments',commentsRoute)
-console.log('__dirname',__dirname)
 app.use('/',express.static(__dirname+'/src/public'))
 
 db.sync().then(()=>{
