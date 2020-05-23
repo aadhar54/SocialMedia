@@ -38,5 +38,13 @@
   
   <script src="/app/my-posts.js"></script>
   <script>
-  displayMyPosts();
+  displayMyPosts()
+
+    //Notes for the doubt mentor
+
+  //Made this function so that it runs onLinkClick() after loadmyposts() and things are done sequentially rather than asynchronosly.
+  //But still enable to set up this click event for the comment link .I thought when I will click on comment , we can get the ev.taget and using that and the attr jquery for data-component we can get the post id .
+  $.when( displayMyPosts() ).done(function() {
+    onLinkClick()
+  })
   </script>
