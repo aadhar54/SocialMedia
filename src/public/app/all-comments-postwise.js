@@ -1,5 +1,7 @@
+
 function loadAllCommentsForPost(){
-    $.get(`/api/comments/post/2`, (comments) => {
+    $.get(`/api/comments/post/${3}`, (comments) => {
+      console.log('bye')
         for (let c of comments) {
           $('#comments-container').append(
             $(`

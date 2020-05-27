@@ -1,9 +1,8 @@
 <div class="container my-2">
     <h1 class="h1 text-center">Recent Posts</h1>
 
-    <div class="row" id="posts-container">
-
-    </div>
+    <div class="row" id="posts-container"></div>
+    
     <!--Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -18,11 +17,11 @@
             <form>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Comment Title</label>
-                <input type="text" class="form-control" id="c-title">
+                <input type="text" class="form-control" id="c-title" required="required">
             </div>
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Comment Body</label>
-                <textarea class="form-control" id="c-body" rows=5></textarea>
+                <textarea class="form-control"  id="c-body" rows=5 required="required"></textarea>
             </div>
 
             </form>
@@ -50,15 +49,24 @@
     })
 
     $('#sendCmntBtn').click(()=>{
-        const userId = JSON.parse(window.localStorage.user).id;
         const title = $('#c-title').val()
         const body = $('#c-body').val()
+        if(!title || !body){
+            alert('Comment body or title was empty.Kindly try again')
+            return
+            //$('#content')
+        }
+        $( ".modal-backdrop" ).remove()
+        $('body').removeClass("modal-open")
+        const userId = JSON.parse(window.localStorage.user).id;
+       
         const postId = pId
         console.log(postId,body,title,userId)
         $.post('/api/comments', { title, body,userId,postId }, (data) => {
-            $('#exampleModal').modal('hide');
+            $('#exampleModal').modal('hide')
+            $('#content').load('/components/all-comments-postwise.html')
         })
-        $('#content').load('/components/my-posts.html')
+        
     })
    },500)
   

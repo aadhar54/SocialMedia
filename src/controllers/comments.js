@@ -14,7 +14,7 @@ async function showCommentsOfUser(Id){
 // show all comments (under a post)
 async function showCommentsOfPost(Id){
     const commentsOfPost = await Comments.findAll({
-    where :{postId:Id},include: [ Posts,Users ]}
+    where :{postId:Id},include: [ Users,Posts ]}
     )
     return commentsOfPost;
  }
