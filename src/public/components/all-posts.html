@@ -18,18 +18,18 @@
             <form>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Comment Title</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" class="form-control" id="c-title">
             </div>
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Comment Body</label>
-                <textarea class="form-control" id="message-text" rows=5></textarea>
+                <textarea class="form-control" id="c-body" rows=5></textarea>
             </div>
 
             </form>
         </div>
         <div class="modal-footer ml-auto mr-auto">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send Comment</button>
+            <button id="sendCmntBtn"type="button" class="btn btn-primary">Send Comment</button>
         </div>
         </div>
     </div>
@@ -40,5 +40,26 @@
 <script src="/app/all-posts.js"></script>
 
 <script>
-   displayAllPosts()
+   loadPosts()
+   setTimeout(()=>{
+    let pId;
+    let atag =$('.comment-link')
+    atag.click((ev) => {
+      pId = `${$(ev.target).attr('post-component')}`
+     return pId
+    })
+
+    $('#sendCmntBtn').click(()=>{
+        const userId = JSON.parse(window.localStorage.user).id;
+        const title = $('#c-title').val()
+        const body = $('#c-body').val()
+        const postId = pId
+        console.log(postId,body,title,userId)
+        $.post('/api/comments', { title, body,userId,postId }, (data) => {
+            $('#exampleModal').modal('hide');
+        })
+        $('#content').load('/components/my-posts.html')
+    })
+   },500)
+  
 </script>
